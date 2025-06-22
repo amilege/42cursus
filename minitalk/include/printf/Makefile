@@ -1,0 +1,34 @@
+NAME = libftprintf.a
+
+HEADER = ft_printf.h
+
+CFLAGS = -Wall -Werror -Wextra -I.
+
+SRC =	ft_putchar.c \
+		ft_printf.c \
+		ft_putstr.c \
+		ft_putnbr.c \
+		ft_hexadecimal.c
+
+OBJ = $(SRC:.c=.o)	
+
+all: $(NAME)	
+
+$(NAME): $(OBJ) Makefile
+	@ar -rcs $(NAME) $(OBJ)
+
+%.o:%.c Makefile $(HEADER)
+	@cc $(CFLAGS) -c $< -o $@
+	@echo "Copilating: $<"
+
+clean:
+	@rm -f $(OBJ)
+	@echo "Eliminando basura..."
+	@echo "Basura eliminada"
+
+fclean: clean
+	@rm -f $(NAME)
+	@echo "TOTAL ELIMINATION"
+re: fclean all
+
+.PHONY: all clean fclean re
